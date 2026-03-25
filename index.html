@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>About</title>
+
 <style>
     body {
         margin: 0;
@@ -11,32 +12,110 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        background: #0f172a;
-        color: #e2e8f0;
-        font-family: monospace;
+        background: radial-gradient(circle at center, #020617, #000);
+        color: #67e8f9;
+        font-family: "Courier New", monospace;
+        overflow: hidden;
     }
-    .container {
+
+    /* subtle moving grid (pixel vibe) */
+    body::before {
+        content: "";
+        position: absolute;
+        width: 200%;
+        height: 200%;
+        background-image: 
+            linear-gradient(#0ea5e9 1px, transparent 1px),
+            linear-gradient(90deg, #0ea5e9 1px, transparent 1px);
+        background-size: 40px 40px;
+        opacity: 0.05;
+        animation: moveGrid 20s linear infinite;
+    }
+
+    @keyframes moveGrid {
+        from { transform: translate(0,0); }
+        to { transform: translate(-40px, -40px); }
+    }
+
+    .card {
+        position: relative;
+        padding: 50px;
+        border: 2px solid #22d3ee;
+        border-radius: 16px;
         text-align: center;
-        padding: 40px;
-        border: 2px solid #38bdf8;
-        border-radius: 12px;
-        box-shadow: 0 0 20px rgba(56,189,248,0.3);
+        backdrop-filter: blur(6px);
+        box-shadow: 0 0 30px rgba(34,211,238,0.3);
+        max-width: 500px;
     }
+
     h1 {
+        font-size: 2.5em;
         margin-bottom: 10px;
-        font-size: 2em;
-        color: #38bdf8;
+        text-shadow: 0 0 10px #22d3ee;
     }
-    p {
-        font-size: 1.2em;
+
+    .tagline {
+        font-size: 1.3em;
+        margin-bottom: 25px;
+        color: #a5f3fc;
+    }
+
+    .desc {
+        font-size: 1em;
+        line-height: 1.6;
         opacity: 0.9;
     }
+
+    /* blinking cursor effect */
+    .cursor::after {
+        content: "_";
+        animation: blink 1s infinite;
+    }
+
+    @keyframes blink {
+        0%, 50%, 100% { opacity: 1; }
+        25%, 75% { opacity: 0; }
+    }
+
+    /* floating pixels */
+    .pixel {
+        position: absolute;
+        width: 6px;
+        height: 6px;
+        background: #22d3ee;
+        opacity: 0.6;
+        animation: float 6s infinite ease-in-out;
+    }
+
+    @keyframes float {
+        0% { transform: translateY(0); opacity: 0.6; }
+        50% { transform: translateY(-20px); opacity: 1; }
+        100% { transform: translateY(0); opacity: 0.6; }
+    }
+
 </style>
 </head>
 <body>
-    <div class="container">
-        <h1>About Me</h1>
-        <p>I do coding with pixel vibes.</p>
+
+<div class="card">
+    <h1>About Me</h1>
+    <div class="tagline cursor">Coding with pixel vibes</div>
+
+    <div class="desc">
+        I build things where code meets creativity.<br><br>
+        Clean logic, glowing UI, and a touch of retro energy.<br>
+        Not just functionality—it's about the feel.<br><br>
+        Every project is crafted like a digital world,<br>
+        one pixel at a time.
     </div>
+</div>
+
+<!-- floating pixels -->
+<div class="pixel" style="top:20%; left:10%; animation-delay:0s;"></div>
+<div class="pixel" style="top:70%; left:20%; animation-delay:1s;"></div>
+<div class="pixel" style="top:40%; left:80%; animation-delay:2s;"></div>
+<div class="pixel" style="top:80%; left:70%; animation-delay:3s;"></div>
+<div class="pixel" style="top:30%; left:50%; animation-delay:4s;"></div>
+
 </body>
 </html>
